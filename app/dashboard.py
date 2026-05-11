@@ -20,10 +20,23 @@ st.set_page_config(
 st.title("Financial Market Intelligence Pipeline")
 st.caption("Daily stock prices + LLM sentiment analysis · Alpaca + NewsAPI + Groq")
 
-# Create cache resource for bigqueryclient 
+# Create cache resource for bigqueryclient, 
+# 2 cases: running on Streamlit cloud, and run locally
 @st.cache_resource
 def get_bq_client():
-    return bigquery.Client(project=PROJECT_ID)
+    # Check if running on Streamlit Cloud
+    if "gcp_service_account" in st.secrets:
+        from google.oauth2 import service_account
+        credentials = service_account.Credentials.from_service_account_info(
+            st.secrets["gcp_service_account"]
+        )
+        return bigquery.Client(
+            project=st.secrets["gcp_service_account"]["project_id"],
+            credentials=credentials
+        )
+    else:
+        # Running locally — use gcp-key.json
+        return bigquery.Client(project=os.environ["GCP_PROJECT_ID"])
 
 # Create cache data for 1hr 
 @st.cache_data(ttl=3600)

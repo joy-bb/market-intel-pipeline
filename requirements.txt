@@ -19,3 +19,4 @@ dagster-dbt
 
 streamlit
 plotly
+google-auth
