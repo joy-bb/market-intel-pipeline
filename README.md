@@ -201,5 +201,5 @@ Clean and strongly structured APIs allow simpler ingestion logic, while real-wor
 
 ## Dashboard
 
-![Dashboard screenshot](screenshot1.png)
-![Dashboard screenshot](screenshot2.png)
+![Dashboard screenshot](screenshot1.PNG)
+![Dashboard screenshot](screenshot2.PNG)
