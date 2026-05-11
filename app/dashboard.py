@@ -10,7 +10,11 @@ from google.cloud import bigquery
 
 load_dotenv()
 
-PROJECT_ID = os.environ["GCP_PROJECT_ID"]
+# Get project ID from secrets (Streamlit Cloud) or env (local)
+if "gcp_service_account" in st.secrets:
+    PROJECT_ID = st.secrets["gcp_service_account"]["project_id"]
+else:
+    PROJECT_ID = os.environ["GCP_PROJECT_ID"]
 
 st.set_page_config(
     page_title = "Market Intelligence Dashboard",
