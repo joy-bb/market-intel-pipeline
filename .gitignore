@@ -1,0 +1,17 @@
+# Secrets
+.env
+gcp-key.json
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Backup files
+*.bk
+
+# dbt
+dbt_market_intel/target/
+dbt_market_intel/dbt_packages/
+dbt_market_intel/logs/
+logs/

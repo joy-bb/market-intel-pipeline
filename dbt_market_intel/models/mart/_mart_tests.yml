@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: fct__daily_prices_enriched
+    description: "Daily prices of each symbol, enriched by adding company details"
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - symbol
+              - trade_date
+    columns:
+      - name: symbol
+        tests: [not_null]
+      - name: trade_date
+        tests: [not_null]
+      - name: close
+        tests: [not_null]
+
+  - name: fct__news_articles_sentiment
+    description: "Combination between news articles and sentiment"
+    columns:
+      - name: article_id
+        tests:
+          - not_null
+          - unique
+      - name: sentiment
+        tests:
+          - accepted_values:
+              values:
+                - positive
+                - negative
+                - neutral
+
+  - name: mart_prices_news_sentiment
+    description: "Final combination between daily price and news sentiment"
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - symbol
+              - trade_date
+    columns:
+      - name: avg_sentiment_score
+        tests: [not_null]
+      - name: article_count
+        tests: [not_null]
+      - name: positive_count
+        tests: [not_null]
+      - name: negative_count
+        tests: [not_null]
+      - name: neutral_count
+        tests: [not_null]

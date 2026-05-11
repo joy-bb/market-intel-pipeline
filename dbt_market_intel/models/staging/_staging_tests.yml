@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: stg__stock_prices
+    description: "Cleaned daily OHLCV bars with daily return % added"
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - symbol
+              - trade_date
+    columns:
+      - name: symbol
+        tests: [not_null]
+      - name: trade_date
+        tests: [not_null]
+      - name: close
+        tests: [not_null]
+
+  - name: stg__news_articles
+    description: "News articles with unique articles id and clean description"
+    columns:
+      - name: article_id
+        tests:
+          - not_null
+          - unique
+      - name: symbol
+        tests: 
+          - relationships:
+              arguments:
+                to: ref("stg__stock_prices")
+                field: symbol
+      - name: url
+        tests: [not_null]
+
+  - name: stg__news_sentiment
+    description: "News sentiment show positive, negative or neutral signal with confidence"
+    columns:
+      - name: article_id
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref("stg__news_articles")
+                field: article_id
+      - name: sentiment
+        tests: [not_null]
+      - name: confidence
+        tests: [not_null]
+      - name: sentiment_score
+        tests: [not_null]

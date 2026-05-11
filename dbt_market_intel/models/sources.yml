@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    database: market-intel-pipeline-495322
+    schema: raw
+    description: "Raw zone - data loaded by python ingestion script"
+
+    tables:
+      - name: stock_prices
+        description: "Daily OHLCV bars from Alpaca Markets API"
+
+      - name: news_articles
+        description: "Financial news headlines from NewsAPI"
+
+      - name: news_sentiment
+        description: "LLM sentiment classifications from Groq"

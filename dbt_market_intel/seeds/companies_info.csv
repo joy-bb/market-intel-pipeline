@@ -1,0 +1,11 @@
+symbol,company_name,sector,market_cap_tier
+AAPL,Apple Inc.,Technology,Mega Cap
+MSFT,Microsoft Corporation,Technology,Mega Cap
+GOOGL,Alphabet Inc.,Communication Services,Mega Cap
+META,"Meta Platforms, Inc.",Communication Services,Mega Cap
+NVDA,NVIDIA Corporation,Technology,Mega Cap
+AMZN,"Amazon.com, Inc.",Consumer Discretionary,Mega Cap
+TSLA,"Tesla, Inc.",Consumer Discretionary,Mega Cap
+JPM,JPMorgan Chase & Co.,Financial Services,Mega Cap
+V,Visa Inc.,Financial Services,Mega Cap
+JNJ,Johnson & Johnson,Healthcare,Mega Cap
